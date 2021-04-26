@@ -15,12 +15,14 @@ const Nav = () => {
    return (
       <header>
          <h2>
-            <a href="/"><span role="img" aria-label="camera"> 📸</span> Oh Snap!</a>
+            <a data-testid="link" href="/">
+               <span role="img" aria-label="camera"> 📸</span> Oh Snap!
+            </a>
          </h2>
 
          <nav>
             <ul className="flex-row">
-               <li className="mx-2"><a href="#about">About me</a></li>
+               <li className="mx-2"><a data-testid="about" href="#about">About me</a></li>
                <li><span>Contact</span></li>
                {/*
                Whenever we map over anything in JSX, the outermost element
