@@ -4,6 +4,10 @@ import { capitalizeFirstLetter } from '../../utils/helpers';
 
 const Nav = ( props ) => {
    const { categories = [], setCurrentCategory, currentCategory } = props;
+console.log( 'currentCategory.name' );
+console.log( currentCategory.name );
+   const selectedCategory = currentCategory.name;
+console.log( selectedCategory );
 
    /*
    The first argument is the callback function, and the second argument is
