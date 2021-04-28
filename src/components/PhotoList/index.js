@@ -112,15 +112,15 @@ const PhotoList = ({ category }) => {
    */
    const currentPhotos = photos.filter(( photo ) => photo.category === category );
     
-   const toggleModal = (  image, i) => {
+   const toggleModal = ( image, i ) => {
       // Set current photo.  The ... spread operation retains the key:value pairs
       setCurrentPhoto({ ...image, index: i });
-      setIsModalOpen( true );
+      setIsModalOpen( !isModalOpen );
     }
 
    return (
       <div>
-         { isModalOpen && <Modal currentPhoto={currentPhoto} /> }
+         { isModalOpen && <Modal currentPhoto={currentPhoto} onClose={toggleModal} /> }
 
          <div className="flex-row">
             {/* Map the currentPhotos array to render each photo that matches the category selected by the user. */}
