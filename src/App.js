@@ -21,20 +21,40 @@ function App() {
       { name: 'landscape', description: 'Fields, farmhouses, waterfalls, and the beauty of nature' },
     ]);
 
-   const [currentCategory, setCurrentCategory] = useState(categories[0]);
+   const [ currentCategory, setCurrentCategory ] = useState(categories[0]);
+
+   /*
+   Set the initial value of contactSelected to false. This is to prevent the
+   contact form from showing when a user initially navigates to the homepage.
+   The Gallery will display instead, which is the first thing the user
+   will want to see.
+   */
+   const [ contactSelected, setContactSelected ] = useState( false );
 
    return (
       <div>
          <Nav
             categories = {categories}
             setCurrentCategory = {setCurrentCategory}
-            currentCategory = {currentCategory}>
+            currentCategory = {currentCategory}
+            contactSelected={contactSelected}
+            setContactSelected={setContactSelected}>
          </Nav>
 
          <main>
-            <ContactForm></ContactForm>
-            <Gallery currentCategory = {currentCategory}></Gallery>
-            <About></About>
+            {/*
+            Use contactSelected to establish a conditional statement to render
+            the Gallery and About components when this value is false and the
+            ContactForm component when true
+            */}
+            { !contactSelected ? (
+               <>
+                  <Gallery currentCategory={currentCategory}></Gallery>
+                  <About></About>
+               </>
+            ) : (
+               <ContactForm></ContactForm>
+            )}
          </main>
       </div>
    );
