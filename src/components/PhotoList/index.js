@@ -1,7 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import Modal from '../Modal';
 
 
 const PhotoList = ({ category }) => {
+   // Set to false, wait until a user clicks on an image first
+   const [ isModalOpen, setIsModalOpen ] = useState( false );
+   const [ currentPhoto, setCurrentPhoto ] = useState();
+
    const [ photos ] = useState([
       {
          name: 'Grocery aisle',
@@ -106,14 +111,23 @@ const PhotoList = ({ category }) => {
    condition, it is returned in an array and assigned to currentPhotos
    */
    const currentPhotos = photos.filter(( photo ) => photo.category === category );
+    
+   const toggleModal = (  image, i) => {
+      // Set current photo.  The ... spread operation retains the key:value pairs
+      setCurrentPhoto({ ...image, index: i });
+      setIsModalOpen( true );
+    }
 
    return (
       <div>
+         { isModalOpen && <Modal currentPhoto={currentPhoto} /> }
+
          <div className="flex-row">
             {/* Map the currentPhotos array to render each photo that matches the category selected by the user. */}
             {currentPhotos.map(( image, i ) => (
                <img src={require( `../../assets/small/${category}/${i}.jpg` ).default}
                     alt={image.name} className="img-thumbnail mx-1"
+                    onClick={() => toggleModal( image, i )}
                     key={image.name} />
             ))}
          </div>
